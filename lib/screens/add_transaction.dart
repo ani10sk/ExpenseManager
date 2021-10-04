@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../widgets/drop_down_types.dart';
+import 'package:intl/intl.dart';
 
 class AddTransaction extends StatefulWidget {
   static const rout = 'add-transaction';
@@ -8,13 +9,14 @@ class AddTransaction extends StatefulWidget {
 }
 
 class _AddTransactionState extends State<AddTransaction> {
+  DateTime presentdate = DateTime.now();
   var choosetransaction = false;
   var choosepurpose = false;
   final form = GlobalKey<FormState>();
 
   var mapData = {
     'amount': '',
-    'date': '',
+    'date': (DateTime.now()).toIso8601String(),
     'category': '',
     'purpose': '',
     'comment': ''
@@ -24,6 +26,24 @@ class _AddTransactionState extends State<AddTransaction> {
     setState(() {
       mapData['category'] = type;
       choosetransaction = false;
+    });
+  }
+
+  void chooseDatepicker() {
+    showDatePicker(
+            context: context,
+            initialDate: DateTime.now(),
+            firstDate: DateTime(2019),
+            lastDate: DateTime(2100))
+        .then((value) {
+      if (value == null) {
+        return;
+      } else {
+        setState(() {
+          presentdate = value;
+          mapData['date'] = presentdate.toIso8601String();
+        });
+      }
     });
   }
 
@@ -63,6 +83,17 @@ class _AddTransactionState extends State<AddTransaction> {
                 },
               ),
             ),
+            SizedBox(
+              height: 20,
+            ),
+            Padding(
+                padding: EdgeInsets.all(10),
+                child: ListTile(
+                  leading: IconButton(
+                      onPressed: chooseDatepicker,
+                      icon: Icon(Icons.calendar_today)),
+                  trailing: Text(DateFormat.yMMMd().format(presentdate)),
+                )),
             Padding(
               padding: EdgeInsets.all(10),
               child: ListTile(
@@ -84,6 +115,30 @@ class _AddTransactionState extends State<AddTransaction> {
                 : SizedBox(
                     height: 1,
                   ),
+            Padding(
+              padding: EdgeInsets.all(10),
+              child: ListTile(
+                leading: Text('Choose Purpose'),
+                trailing: Icon(Icons.arrow_downward_sharp),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.all(10),
+              child: Container(
+                padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
+                decoration: BoxDecoration(border: Border.all()),
+                child: TextFormField(
+                  textInputAction: TextInputAction.done,
+                  maxLines: 6,
+                  decoration: InputDecoration(
+                    labelText: 'Enter comments you wish to enter',
+                  ),
+                  onSaved: (value) {
+                    mapData['comment'] = value.toString();
+                  },
+                ),
+              ),
+            ),
             Padding(
               padding: EdgeInsets.all(10),
               child: OutlinedButton(

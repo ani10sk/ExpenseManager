@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import './screens/transactions_page.dart';
 import './screens/add_transaction.dart';
+import './screens/add_expenditure.dart';
 
 void main() {
   runApp(MyApp());
@@ -16,7 +17,10 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: TransactionsPage(),
-      routes: {AddTransaction.rout: (ctx) => AddTransaction()},
+      routes: {
+        AddTransaction.rout: (ctx) => AddTransaction(),
+        AddExpenditure.rout: (ctx) => AddExpenditure()
+      },
     );
   }
 }

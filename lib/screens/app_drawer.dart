@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import './add_expenditure.dart';
 
 class AppDrawer extends StatelessWidget {
   @override
@@ -24,7 +25,7 @@ class AppDrawer extends StatelessWidget {
             trailing: Icon(Icons.arrow_forward_ios_outlined),
           ),
           ListTile(
-            onTap: () {},
+            onTap: () => Navigator.of(context).pushNamed(AddExpenditure.rout),
             title: Text('Add Expenditure Type'),
             trailing: Icon(Icons.arrow_forward_ios_outlined),
           ),
