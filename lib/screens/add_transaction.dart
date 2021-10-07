@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../widgets/drop_down_types.dart';
 import 'package:intl/intl.dart';
+import '../widgets/drop_down_purposes.dart';
 
 class AddTransaction extends StatefulWidget {
   static const rout = 'add-transaction';
@@ -26,6 +27,13 @@ class _AddTransactionState extends State<AddTransaction> {
     setState(() {
       mapData['category'] = type;
       choosetransaction = false;
+    });
+  }
+
+  void getexpenditurepurpose(String purpose) {
+    setState(() {
+      mapData['purpose'] = purpose;
+      choosepurpose = false;
     });
   }
 
@@ -118,10 +126,25 @@ class _AddTransactionState extends State<AddTransaction> {
             Padding(
               padding: EdgeInsets.all(10),
               child: ListTile(
-                leading: Text('Choose Purpose'),
-                trailing: Icon(Icons.arrow_downward_sharp),
+                leading: mapData['purpose'] == ''
+                    ? Text('Choose Purpose')
+                    : Text(mapData['purpose'].toString()),
+                trailing: choosepurpose
+                    ? Icon(Icons.arrow_upward_sharp)
+                    : Icon(Icons.arrow_downward_sharp),
+                onTap: () {
+                  setState(() {
+                    choosepurpose = !choosepurpose;
+                  });
+                },
               ),
             ),
+            choosepurpose
+                ? DropDownPurpose(
+                    mapData['category'].toString(), getexpenditurepurpose)
+                : SizedBox(
+                    height: 1,
+                  ),
             Padding(
               padding: EdgeInsets.all(10),
               child: Container(

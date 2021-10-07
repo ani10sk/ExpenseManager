@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import './add_expenditure.dart';
+import 'add_expenditure_type.dart';
+import 'add_income_type.dart';
 
 class AppDrawer extends StatelessWidget {
   @override
@@ -20,7 +21,7 @@ class AppDrawer extends StatelessWidget {
             decoration: BoxDecoration(color: Colors.black),
           ),
           ListTile(
-            onTap: () {},
+            onTap: () => Navigator.of(context).pushNamed(AddIncome.rout),
             title: Text('Add Income Source'),
             trailing: Icon(Icons.arrow_forward_ios_outlined),
           ),
