@@ -27,7 +27,12 @@ class _DropDownPurposeState extends State<DropDownPurpose> {
                         )
                       : ListView.builder(
                           itemBuilder: (ctx, i) => ListTile(
-                            leading: Text(f.incomeTypes[i].nameoffinance),
+                            leading: Text(
+                              f.incomeTypes[i].nameoffinance,
+                              style: TextStyle(color: Colors.green),
+                            ),
+                            onTap: () => widget.setExpendituretype(
+                                f.incomeTypes[i].nameoffinance),
                           ),
                           itemCount: f.incomeTypes.length,
                         ))
@@ -39,7 +44,12 @@ class _DropDownPurposeState extends State<DropDownPurpose> {
                             )
                           : ListView.builder(
                               itemBuilder: (ctx, i) => ListTile(
-                                leading: Text(f.expenseTypes[i].nameoffinance),
+                                leading: Text(
+                                  f.expenseTypes[i].nameoffinance,
+                                  style: TextStyle(color: Colors.red),
+                                ),
+                                onTap: () => widget.setExpendituretype(
+                                    f.incomeTypes[i].nameoffinance),
                               ),
                               itemCount: f.expenseTypes.length,
                             ))

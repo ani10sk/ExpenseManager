@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../widgets/drop_down_types.dart';
 import 'package:intl/intl.dart';
 import '../widgets/drop_down_purposes.dart';
+import '../providers/transaction.dart';
+import '../providers/transactions.dart';
 
 class AddTransaction extends StatefulWidget {
   static const rout = 'add-transaction';
@@ -165,7 +168,19 @@ class _AddTransactionState extends State<AddTransaction> {
             Padding(
               padding: EdgeInsets.all(10),
               child: OutlinedButton(
-                  onPressed: () => savedata(), child: Text('Submit data')),
+                  onPressed: () {
+                    savedata();
+                    Transaction tr = Transaction(
+                        mapData['amount'].toString(),
+                        mapData['purpose'].toString(),
+                        mapData['category'].toString(),
+                        mapData['date'].toString(),
+                        mapData['date'].toString(),
+                        mapData['comment'].toString());
+                    Provider.of<Transactions>(context, listen: false)
+                        .addTransaction(tr);
+                  },
+                  child: Text('Submit data')),
             )
           ],
         ),

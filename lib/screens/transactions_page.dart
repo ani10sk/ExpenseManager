@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../screens/add_transaction.dart';
+import '../providers/transactions.dart';
 import './app_drawer.dart';
 
 class TransactionsPage extends StatelessWidget {
@@ -19,7 +21,16 @@ class TransactionsPage extends StatelessWidget {
         ),
         drawer: AppDrawer(),
         body: Center(
-          child: Text('To be replaced with list view soon'),
+          child: Consumer<Transactions>(
+            builder: (_, tr, __) => tr.transactions.length == 0
+                ? Center(child: Text('No transactions recorded'))
+                : ListView.builder(
+                    itemBuilder: (ctx, i) => ListTile(
+                      leading: Text(tr.transactions[i].purpose),
+                    ),
+                    itemCount: tr.transactions.length,
+                  ),
+          ),
         ));
   }
 }

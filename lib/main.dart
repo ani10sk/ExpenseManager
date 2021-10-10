@@ -5,11 +5,13 @@ import './screens/add_transaction.dart';
 import 'screens/add_expenditure_type.dart';
 import './screens/add_income_type.dart';
 import './providers/finances.dart';
+import './providers/transactions.dart';
 
 void main() {
-  runApp(MultiProvider(
-      providers: [ChangeNotifierProvider(create: (_) => Finances())],
-      child: MyApp()));
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider(create: (_) => Finances()),
+    ChangeNotifierProvider(create: (_) => Transactions())
+  ], child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {

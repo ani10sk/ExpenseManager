@@ -14,12 +14,4 @@ class Finances extends ChangeNotifier {
     expenseTypes.add(ExpenseType(expensetype));
     notifyListeners();
   }
-
-  get incometypes {
-    return incomeTypes;
-  }
-
-  get expensetypes {
-    return expenseTypes;
-  }
 }
