@@ -67,10 +67,31 @@ class _AddTransactionState extends State<AddTransaction> {
     }
   }
 
+  Future<void> showAlertMessage() {
+    return showDialog<void>(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('The purpose is empty'),
+            content: Text('The purpose of a transaction cannot be left blank'),
+            actions: [
+              TextButton(
+                  onPressed: () => Navigator.of(context).pop(),
+                  child: Text('OK'))
+            ],
+          );
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: mapData['category'] == ''
+            ? Colors.blue
+            : mapData['category'] == 'Income'
+                ? Colors.green
+                : Colors.red,
         title: Text('Add Transactions'),
       ),
       body: Form(
@@ -168,7 +189,16 @@ class _AddTransactionState extends State<AddTransaction> {
             Padding(
               padding: EdgeInsets.all(10),
               child: OutlinedButton(
-                  onPressed: () {
+                style: OutlinedButton.styleFrom(
+                    backgroundColor: mapData['category'] == ''
+                        ? Colors.blue
+                        : mapData['category'] == 'Income'
+                            ? Colors.green
+                            : Colors.red),
+                onPressed: () {
+                  if (mapData['purpose'] == '') {
+                    showAlertMessage();
+                  } else {
                     savedata();
                     Transaction tr = Transaction(
                         mapData['amount'].toString(),
@@ -179,8 +209,14 @@ class _AddTransactionState extends State<AddTransaction> {
                         mapData['comment'].toString());
                     Provider.of<Transactions>(context, listen: false)
                         .addTransaction(tr);
-                  },
-                  child: Text('Submit data')),
+                    Navigator.of(context).pop();
+                  }
+                },
+                child: Text(
+                  'Submit data',
+                  style: TextStyle(color: Colors.black),
+                ),
+              ),
             )
           ],
         ),

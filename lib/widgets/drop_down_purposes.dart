@@ -49,7 +49,7 @@ class _DropDownPurposeState extends State<DropDownPurpose> {
                                   style: TextStyle(color: Colors.red),
                                 ),
                                 onTap: () => widget.setExpendituretype(
-                                    f.incomeTypes[i].nameoffinance),
+                                    f.expenseTypes[i].nameoffinance),
                               ),
                               itemCount: f.expenseTypes.length,
                             ))

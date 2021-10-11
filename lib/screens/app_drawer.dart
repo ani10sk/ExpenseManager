@@ -21,13 +21,28 @@ class AppDrawer extends StatelessWidget {
             decoration: BoxDecoration(color: Colors.black),
           ),
           ListTile(
+            onTap: () {},
+            title: Text('Personal Finances'),
+            trailing: Icon(Icons.arrow_forward_ios_outlined),
+          ),
+          ListTile(
             onTap: () => Navigator.of(context).pushNamed(AddIncome.rout),
-            title: Text('Add Income Source'),
+            title: Text('Add/View Income Type'),
             trailing: Icon(Icons.arrow_forward_ios_outlined),
           ),
           ListTile(
             onTap: () => Navigator.of(context).pushNamed(AddExpenditure.rout),
-            title: Text('Add Expenditure Type'),
+            title: Text('Add/View Expenditure Type'),
+            trailing: Icon(Icons.arrow_forward_ios_outlined),
+          ),
+          ListTile(
+            onTap: () {},
+            title: Text('Add/View Investments'),
+            trailing: Icon(Icons.arrow_forward_ios_outlined),
+          ),
+          ListTile(
+            onTap: () => {},
+            title: Text('Add/View Bank Accounts'),
             trailing: Icon(Icons.arrow_forward_ios_outlined),
           ),
           ListTile(
